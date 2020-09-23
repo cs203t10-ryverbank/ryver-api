@@ -2,9 +2,7 @@
 
 The Ryver Bank API is built as a collection of microservices.
 
-## Services
-
-### ryver-registry
+## ryver-registry
 
 Ryver Registry is the service registry for the entire system. It is built on top of [Netflix Eureka](https://github.com/Netflix/eureka), with the main purpose of **coordinating all other microservices**.
 
@@ -12,7 +10,7 @@ Ryver Registry runs on the standard Eureka port of `8761`. To view a dashboard o
 
 Without the Ryver Registry service, all other services will not be able to coordinate with each other.
 
-#### Registering a client
+### Registering a client
 
 To be detectable, a client must register with Eureka and provide metadata about itself -- such as host, port, and other details. Eureka receives heartbeat messages from each instance of the client, and keeps track of all instances of the client.
 
@@ -53,7 +51,7 @@ eureka:
 
 Eureka will automatically configure the Spring Boot application to register itself with the defined Eureka Server.
 
-#### Using the registry
+### Using the registry
 
 To use the registry to find other services to talk to, first activate the `DiscoveryClient` with the `@EnableDiscoveryClient` annotation on the Spring Boot application.
 
@@ -80,7 +78,7 @@ The discovery client lets you find all instances of a client service, given its 
 
 The `ServiceInstance` interface exposes `getUri()`, `getHost()`, and `getPort()` methods amongst other things. You can then use these to perform the necessary REST interactions with the right service.
 
-### ryver-gateway
+## ryver-gateway
 
 Ryver Gateway acts as the public-facing service that handles all requests for the entire Ryver Bank API. It is built on top of [Netflix Zuul](https://github.com/Netflix/zuul).
 
@@ -88,7 +86,7 @@ All requests made will first arrive at Ryver Gateway, then be redirected to the 
 
 As the public-facing service, Ryver Gateway runs on port `8080`, the default for Spring Boot applications. To prevent conflicts, ensure that your client service sets a unique port number in its `application.yml`.
 
-#### Configuring the route
+### Configuring the route
 
 To redirect a request to a certain client service, add an entry to `src/main/resources/application.yml`.
 
