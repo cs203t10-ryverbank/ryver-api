@@ -4,11 +4,11 @@ The Ryver Bank API is built as a collection of microservices.
 
 ## ryver-registry
 
-Ryver Registry is the service registry for the entire system. It is built on top of [Netflix Eureka](https://github.com/Netflix/eureka), with the main purpose of **coordinating all other microservices**.
+Ryver Registry is the service registry for the entire system. It is built on top of [Netflix Eureka](https://github.com/Netflix/eureka), with the main purpose of **coordinating all other microservices**. Ryver Registry keeps track of all microservices registered in the system, and allows different microservices to communicate to each other without hard-coding any host addresses or port numbers.
+
+> Without the Ryver Registry service, all other services will not be able to coordinate with each other.
 
 Ryver Registry runs on the standard Eureka port of `8761`. To view a dashboard of all running services, visit the [dashboard](http://localhost:8761/) in your browser.
-
-Without the Ryver Registry service, all other services will not be able to coordinate with each other.
 
 ### Registering a client
 
