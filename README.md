@@ -84,13 +84,13 @@ Ryver Gateway acts as the public-facing service that handles all requests for th
 
 All requests made will first arrive at Ryver Gateway, then be redirected to the appropriate client microservice accordingly. Ryver Gateway is also able to naturally load-balance requests by integrating with Ryver Registry and selecting appropriate instances of a required client service.
 
-As the public-facing service, Ryver Gateway runs on port `8080`, the default for Spring Boot applications. To prevent conflicts, ensure that your client service sets a unique port number in its `application.yml`.
+As the public-facing service, Ryver Gateway runs on port `8080` -- the default for Spring Boot applications. To prevent conflicts, ensure that your client service sets a unique port number in its `application.yml`.
 
 ### Configuring the route
 
 To redirect a request to a certain client service, add an entry to `src/main/resources/application.yml`.
 
-For example, to redirect all requests for `localhost:8080/auth/...` to the authentication service with the name of `ryver-auth`:
+For example, to redirect all requests for `localhost:8080/auth/...` to the `ryver-auth` service:
 
 ```yml
 zuul:
