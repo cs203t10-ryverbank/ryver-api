@@ -1,3 +1,6 @@
 [submodule "ryver-registry"]
 	path = ryver-registry
 	url = git@github.com:cs203t10-ryverbank/ryver-registry.git
+[submodule "ryver-auth"]
+	path = ryver-auth
+	url = git@github.com:cs203t10-ryverbank/ryver-auth.git
