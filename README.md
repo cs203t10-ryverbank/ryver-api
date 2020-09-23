@@ -79,3 +79,27 @@ public class YourClientApplication {
 The discovery client lets you find all instances of a client service, given its service name as defined by its `spring.application.name` property in its `src/main/resources/bootstrap.yml`.
 
 The `ServiceInstance` interface exposes `getUri()`, `getHost()`, and `getPort()` methods amongst other things. You can then use these to perform the necessary REST interactions with the right service.
+
+### ryver-gateway
+
+Ryver Gateway acts as the public-facing service that handles all requests for the entire Ryver Bank API. It is built on top of [Netflix Zuul](https://github.com/Netflix/zuul).
+
+All requests made will first arrive at Ryver Gateway, then be redirected to the appropriate client microservice accordingly. Ryver Gateway is also able to naturally load-balance requests by integrating with Ryver Registry and selecting appropriate instances of a required client service.
+
+As the public-facing service, Ryver Gateway runs on port `8080`, the default for Spring Boot applications. To prevent conflicts, ensure that your client service sets a unique port number in its `application.yml`.
+
+#### Configuring the route
+
+To redirect a request to a certain client service, add an entry to `src/main/resources/application.yml`.
+
+For example, to redirect all requests for `localhost:8080/auth/...` to the authentication service with the name of `ryver-auth`:
+
+```yml
+zuul:
+  sensitive-headers: Cookie,Set-Cookie  # Ensure that all cookies are passed through the proxy.
+  routes:
+    auth:
+      path: /auth/**
+      service-id: ryver-auth
+```
+
