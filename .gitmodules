@@ -4,3 +4,6 @@
 [submodule "ryver-auth"]
 	path = ryver-auth
 	url = git@github.com:cs203t10-ryverbank/ryver-auth.git
+[submodule "ryver-gateway"]
+	path = ryver-gateway
+	url = git@github.com:cs203t10-ryverbank/ryver-gateway.git

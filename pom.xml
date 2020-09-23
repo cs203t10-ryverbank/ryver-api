@@ -12,8 +12,9 @@
 
 
   <modules>
-    <module>ryver-auth</module>
     <module>ryver-registry</module>
+    <module>ryver-gateway</module>
+    <module>ryver-auth</module>
   </modules>
 
 </project>
