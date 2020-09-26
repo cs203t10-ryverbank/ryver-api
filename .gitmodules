@@ -7,3 +7,6 @@
 [submodule "ryver-gateway"]
 	path = ryver-gateway
 	url = git@github.com:cs203t10-ryverbank/ryver-gateway.git
+[submodule "ryver-fts"]
+	path = ryver-fts
+	url = git@github.com:cs203t10-ryverbank/ryver-fts.git

@@ -15,6 +15,7 @@
     <module>ryver-registry</module>
     <module>ryver-gateway</module>
     <module>ryver-auth</module>
+    <module>ryver-fts</module>
   </modules>
 
 </project>
