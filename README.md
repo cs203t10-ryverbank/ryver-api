@@ -33,7 +33,7 @@ server:
   port: <your-client-service-port>
 ```
 
-Finally, define the name of the client service and the location of the Eureka Server in `src/main/resources/bootstrap.yml`.
+Finally, define the name of the client service and the location of the Eureka Server in `src/main/resources/application.yml`.
 
 ```yml
 spring:
@@ -46,8 +46,6 @@ eureka:
   instance:
     prefer-ip-address: true
 ```
-
-> Use `bootstrap.yml` for any configuration that is required before `application.yml` is loaded.
 
 Eureka will automatically configure the Spring Boot application to register itself with the defined Eureka Server.
 
@@ -74,7 +72,7 @@ public class YourClientApplication {
 }
 ```
 
-The discovery client lets you find all instances of a client service, given its service name as defined by its `spring.application.name` property in its `src/main/resources/bootstrap.yml`.
+The discovery client lets you find all instances of a client service, given its service name as defined by its `spring.application.name` property in its `src/main/resources/application.yml`.
 
 The `ServiceInstance` interface exposes `getUri()`, `getHost()`, and `getPort()` methods amongst other things. You can then use these to perform the necessary REST interactions with the right service.
 
