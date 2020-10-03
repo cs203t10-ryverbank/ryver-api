@@ -10,3 +10,6 @@
 [submodule "ryver-fts"]
 	path = ryver-fts
 	url = git@github.com:cs203t10-ryverbank/ryver-fts.git
+[submodule "ryver-cms"]
+	path = ryver-cms
+	url = git@github.com:cs203t10-ryverbank/ryver-cms.git
