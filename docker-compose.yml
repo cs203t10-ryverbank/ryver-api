@@ -90,7 +90,7 @@ services:
       - gateway
       - auth
       - fts
-      - chrome
+      # - chrome
     ports:
       - "8086:8086"
     links:
@@ -100,27 +100,25 @@ services:
     environment:
       - eureka.client.serviceUrl.defaultZone=http://ryver-registry:8761/eureka/
       - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
-    # extra_hosts:
-    #   - "remoteHost: http://172.19.0.3:5555"
-  selenium-hub:
-    restart: always
-    image: selenium/hub:latest
-    container_name: selenium-hub
-    ports:
-      - "4444:4444"
-  chrome:
-    restart: always
-    image: selenium/node-chrome-debug:latest
-    ports:
-      - "5900-5999:5900"
-    depends_on:
-      - selenium-hub
-    environment:
-      HUB_HOST: selenium-hub
-      HUB_PORT_4444_TCP_ADDR: selenium-hub
-      HUB_PORT_4444_TCP_PORT: 4444
-      DBUS_SESSION_BUS_ADDRESS: "/dev/null"
-    links:
-      - selenium-hub:hub
+  # selenium-hub:
+  #   restart: always
+  #   image: selenium/hub:latest
+  #   container_name: selenium-hub
+  #   ports:
+  #     - "4444:4444"
+  # chrome:
+  #   restart: always
+  #   image: selenium/node-chrome-debug:latest
+  #   ports:
+  #     - "5900-5999:5900"
+  #   depends_on:
+  #     - selenium-hub
+  #   environment:
+  #     HUB_HOST: selenium-hub
+  #     HUB_PORT_4444_TCP_ADDR: selenium-hub
+  #     HUB_PORT_4444_TCP_PORT: 4444
+  #     DBUS_SESSION_BUS_ADDRESS: "/dev/null"
+  #   links:
+  #     - selenium-hub:hub
 networks:
   discovery:
