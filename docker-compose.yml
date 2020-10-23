@@ -1,0 +1,126 @@
+version: "3.8"
+services:
+  registry:
+    image: ryver-registry
+    container_name: ryver-registry
+    build:
+      context: .
+      dockerfile: ryver-registry/Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - "discovery"
+    environment:
+      - EUREKA_INSTANCE_PREFERIPADDRESS=true
+
+  gateway:
+    image: ryver-gateway
+    build:
+      context: .
+      dockerfile: ryver-gateway/Dockerfile
+    depends_on:
+      - registry
+    container_name: ryver-gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - "discovery"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://ryver-registry:8761/eureka/
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+
+  auth:
+    image: ryver-auth
+    build:
+      context: .
+      dockerfile: ryver-auth/Dockerfile
+    container_name: ryver-auth
+    depends_on:
+      - registry
+      - gateway
+    ports:
+      - "8081:8081"
+    networks:
+      - "discovery"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://ryver-registry:8761/eureka/
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+
+  fts:
+    image: ryver-fts
+    build:
+      context: .
+      dockerfile: ryver-fts/Dockerfile
+    depends_on:
+      - registry
+      - gateway
+      - auth
+    ports:
+      - "8083:8083"
+    networks:
+      - "discovery"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://ryver-registry:8761/eureka/
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+
+  cms:
+    image: ryver-cms
+    build:
+      context: .
+      dockerfile: ryver-cms/Dockerfile
+    depends_on:
+      - registry
+      - gateway
+      - auth
+    ports:
+      - "8082:8082"
+    networks:
+      - "discovery"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://ryver-registry:8761/eureka/
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+
+  market:
+    image: ryver-market
+    build:
+      context: .
+      dockerfile: ryver-market/Dockerfile
+    depends_on:
+      - registry
+      - gateway
+      - auth
+      - fts
+      - chrome
+    ports:
+      - "8086:8086"
+    links:
+      - fts
+    networks:
+      - "discovery"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://ryver-registry:8761/eureka/
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+    # extra_hosts:
+    #   - "remoteHost: http://172.19.0.3:5555"
+  selenium-hub:
+    restart: always
+    image: selenium/hub:latest
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+  chrome:
+    restart: always
+    image: selenium/node-chrome-debug:latest
+    ports:
+      - "5900-5999:5900"
+    depends_on:
+      - selenium-hub
+    environment:
+      HUB_HOST: selenium-hub
+      HUB_PORT_4444_TCP_ADDR: selenium-hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      DBUS_SESSION_BUS_ADDRESS: "/dev/null"
+    links:
+      - selenium-hub:hub
+networks:
+  discovery:
