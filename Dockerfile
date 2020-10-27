@@ -9,7 +9,9 @@ COPY ./ryver-auth/target/out.jar ./ryver-auth/
 COPY ./ryver-cms/target/out.jar ./ryver-cms/
 COPY ./ryver-fts/target/out.jar ./ryver-fts/
 COPY ./ryver-market/target/out.jar ./ryver-market/
-COPY ./ryver-market/lib ./ryver-market/
+# FakeScraper.java in ryver-market will look for the csv file in lib/FakeStocks.csv.
+# Copy it to the root folder to enable discovery.
+COPY ./ryver-market/lib ./lib/
 # Copy service runner script
 COPY ./run-all.sh ./
 # Expose the Eureka server port
