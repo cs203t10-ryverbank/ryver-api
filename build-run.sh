@@ -1,7 +1,8 @@
+# Update all submodules to latest of the branch
+git submodule foreach 'git pull'
 # Create a fresh build and package for all microservices.
 mvn clean package -Dmaven.test.skip=true
-# Compose all docker images and run in the background.
-docker-compose up -d
-# To stop the services, run:
-# docker-compose down
-
+# Compose the docker image.
+docker build -t bryanmylee/ryver-api .
+# To run the image, use
+# docker run -p 8761:8761 -p 80:8080 --name ryver-api bryanmylee/ryver-api
