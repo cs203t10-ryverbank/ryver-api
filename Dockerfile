@@ -17,5 +17,7 @@ COPY ./ryver-market/target/out.jar ./ryver-market/
 # Expose the Eureka server port
 EXPOSE 8761
 EXPOSE 8080
+# Set the timezone
+ENV TZ Asia/Singapore
 # Run all services
 CMD ./run-all.sh
