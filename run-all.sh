@@ -6,4 +6,6 @@ java -jar ./ryver-gateway/out.jar &
 java -jar ./ryver-auth/out.jar &
 java -jar ./ryver-cms/out.jar &
 java -jar ./ryver-fts/out.jar &
-java -jar ./ryver-market/out.jar
+java -jar ./ryver-market/out.jar &
+python3 ./ryver-recommendations/app.py
+

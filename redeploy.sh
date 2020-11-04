@@ -1,7 +1,7 @@
 # Update all submodules to latest of the branch
 git submodule foreach 'git pull'
-# Create a fresh build and package for all microservices.
-mvn clean package -Dmaven.test.skip=true
+# Build and package for all microservices.
+mvn package -Dmaven.test.skip=true
 # Compose the docker image.
 docker build -t bryanmylee/ryver-api .
 # Push the image
