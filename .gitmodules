@@ -22,3 +22,7 @@
 	path = ryver-market
 	url = git@github.com:cs203t10-ryverbank/ryver-market.git
 	branch = master
+[submodule "ryver-recommendations"]
+	path = ryver-recommendations
+	url = git@github.com:cs203t10-ryverbank/ryver-recommendations.git
+	branch = master
